@@ -2,6 +2,7 @@ var http = require('http');
 var restify = require('restify');
 var bson = require('bson');
 var util = require('util');
+var cors = require('cors');
 var messageController = require('./messageController');
 
 var MongoClient = require('mongodb').MongoClient;
@@ -27,6 +28,7 @@ var server = restify.createServer();
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
+server.use(cors());
 
 
 /**
