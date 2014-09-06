@@ -3,7 +3,6 @@ var restify = require('restify');
 var bson = require('bson');
 var util = require('util');
 var cors = require('cors');
-var messageController = require('./messageController');
 
 var MongoClient = require('mongodb').MongoClient;
 var db;
@@ -34,8 +33,20 @@ server.use(cors());
 /**
  * Routes
  */
-server.get('/message/:id', function(req, res, next) {messageController.getMessage(db, req, res, util); return next();});
-server.post('/message/:id', function(req, res, next) {messageController.postMessage(db, req, res, util); return next();});
+server.get('/message/:id', function(req, res, next) {
+  db.collection("test").find({user_id : 10}).toArray(function(err,items){
+    res.send(items);
+  });
+
+  return next();
+});
+
+server.post('/messages', function(req, res, next) {
+  db.collection("test").insert({user_id : 10, message : req.params.message}, function(err, result) {});
+
+  res.send("Insert Complete");
+  return next();
+});
 
 
 /**
