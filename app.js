@@ -11,7 +11,7 @@ var db;
 /**
  * DB Connection
  */
-MongoClient.connect("mongodb://localhost:27017/exampleDb", function(err, database) {
+MongoClient.connect("mongodb://127.0.0.1:27017/exampleDb", function(err, database) {
   if(err) throw err;
 
   db = database;
